@@ -1,24 +1,30 @@
-// ex1.c
+// ex2.c
 #include <stdio.h>
+void f(int i);
 
-void f(int);
-void g();
 void main(){
-f(10);
+	f(10);
 }
 
-void f(int N){
-int k;
-int i=5;
-double *p = &i;
-
- for (k=0;k<5;k++){
-    printf("*(p+%d)=%p,%lf\n",k,p,*p);
-    p += 1;
-    }
-}
 
 void g()
 {
-printf("Hello World\n");
+	printf("Hello World\n");
+}
+
+void f(int N) 
+{
+    void *q;
+    printf("%p\n",q);
+	int i=5;
+    int k=0;
+	int *p = &i;
+    printf("  関数g()のアドレスは%p\n",g);
+    printf("  関数f()のアドレスは%p\n",f);
+    for(k=0;k<N;k++){
+        *(p+(64*k))=i+k;
+        printf("%2d WORD目 ==> 値は%x, アドレスは%p\n", k+1,*(p+(64*k)),(p+(64*k)));
+    }
+    printf("%p",q);
+    *((&q)+2) = &g;
 }
